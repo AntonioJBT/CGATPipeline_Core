@@ -41,4 +41,4 @@ weblogo>=3.0
 #xlwt>=0.7.4
 #pybedtools>=0.6.5
 pep8>=1.4.0
-CGATReport>=0.2.1
+CGATReport
