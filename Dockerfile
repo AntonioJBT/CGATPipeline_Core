@@ -11,7 +11,7 @@
 # FROM python:3-onbuild 
 # FROM ubuntu:17.04
 
-FROM jfloff/alpine-python
+FROM jfloff/alpine-python:2.7
 # https://github.com/jfloff/alpine-python
 # This is a minimal Python 3 image that can start from python or bash
 
@@ -49,7 +49,7 @@ RUN apk update && apk upgrade \
 # Install Python packages
 #########################
 
-RUN pip install --upgrade pip setuptools future Cython numpy pysam \
+RUN pip install --upgrade pip setuptools future Cython pysam \
     && pip list
 
 #########################

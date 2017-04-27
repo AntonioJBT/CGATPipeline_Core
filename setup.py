@@ -11,26 +11,26 @@ import re
 # Is there a way to do this more elegantly?
 #     1. Run "pip install numpy"
 #     2. Wrap inside functions (works for numpy/pysam, but not cython)
-try:
-    import numpy
-except ImportError:
-    raise ImportError(
-        "the CGAT code collection requires numpy to be installed "
-        "before running setup.py (pip install numpy)")
+#try:
+#    import numpy
+#except ImportError:
+#    raise ImportError(
+#        "the CGAT code collection requires numpy to be installed "
+#        "before running setup.py (pip install numpy)")
 
-try:
-    import Cython
-except ImportError:
-    raise ImportError(
-        "the CGAT code collection requires cython to "
-        "be installed before running setup.py (pip install cython)")
+#try:
+#    import Cython
+#except ImportError:
+#    raise ImportError(
+#        "the CGAT code collection requires cython to "
+#        "be installed before running setup.py (pip install cython)")
 
-try:
-    import pysam
-except ImportError:
-    raise ImportError(
-        "the CGAT code collection requires pysam to "
-        "be installed before running setup.py (pip install pysam)")
+#try:
+#    import pysam
+#except ImportError:
+#    raise ImportError(
+#        "the CGAT code collection requires pysam to "
+#        "be installed before running setup.py (pip install pysam)")
 
 ########################################################################
 ########################################################################
