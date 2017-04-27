@@ -1,10 +1,11 @@
 .. image:: https://travis-ci.org/AntonioJBT/CGATPipeline_core.svg?branch=master
     :target: https://travis-ci.org/AntonioJBT/CGATPipeline_core
 
-**This is a fork to test the minimal components of CGATPipelines:
+**This is a fork to test the minimal components of CGATPipelines:**
 
     CGATPipelines/Pipeline
-    scripts/pipeline_quickstart.py**
+    
+    scripts/pipeline_quickstart.py
     
 The real CGATPipelines are here_.
 
