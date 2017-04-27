@@ -39,8 +39,7 @@ RUN apk update && apk upgrade \
     vim \ 
     wget \
     bzip2 \
-    unzip \
-    fixincludes
+    unzip
 
 # For Ubuntu from here:
 #https://github.com/CGATOxford/CGATPipelines/blob/master/install-CGAT-tools.sh
