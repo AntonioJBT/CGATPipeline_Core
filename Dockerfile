@@ -39,11 +39,6 @@ RUN apt-get update && apt-get install -y \
     unzip \
     vim
 
-RUN conda update anaconda \
-    && conda install argcomplete \
-    && eval "$(register-python-argcomplete conda)"
-
-
 #########################
 # Install Python packages
 #########################

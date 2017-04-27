@@ -15,8 +15,6 @@ include requires.txt
 
 exclude scripts/*
 
-recursive-exclude everything_else *
-
 # CGAT scripts to include - these
 # are named explicitely
 
@@ -25,6 +23,9 @@ include scripts/__init__.py
 include scripts/version.py
 include scripts/cgat_ruffus_profile.py
 include CGAT/__init__.py
-include CGAT/Experiment.py
+include CGAT/*.py
+
+# Configuration and data files:
+recursive-include CGATPipelines *ini
 
 # extensions

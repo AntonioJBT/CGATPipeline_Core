@@ -1,5 +1,6 @@
 # latest setutools required for automatic cythonization
 
+brewer2mpl
 setuptools>=1.1
 #pyparsing>=1.5.7
 #cython>=0.19
@@ -24,7 +25,7 @@ drmaa>=0.5
 #rdflib>=0.4.1
 #psycopg2>=2.5
 
-#rpy2>=2.6
+rpy2>=2.6
 ruffus>=2.4
 
 #scipy>=0.11
