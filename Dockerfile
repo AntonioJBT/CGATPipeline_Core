@@ -36,7 +36,12 @@ RUN apt-get update && apt-get install -y \
     wget \
     bzip2 \
     fixincludes \
-    unzip
+    unzip \
+    vim
+
+RUN conda update anaconda \
+    && conda install argcomplete \
+    && eval "$(register-python-argcomplete conda)"
 
 
 #########################
@@ -80,7 +85,7 @@ RUN cd home \
 #ENTRYPOINT ["/shared/conda-install/envs/cgat-devel/bin/cgat"]
 
 #CMD echo "Hello world"
-CMD ["/bin/sh"]
+CMD ["/bin/bash"]
 
 # Create a shared folder between docker container and host
 #VOLUME ["/shared/data"]
