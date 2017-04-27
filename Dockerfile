@@ -49,8 +49,8 @@ RUN apk update && apk upgrade \
 # Install Python packages
 #########################
 
-#RUN pip install --upgrade pip setuptools future \
-#    && pip list
+RUN pip install --upgrade pip setuptools future Cython numpy pysam \
+    && pip list
 
 #########################
 # Install package to test 
