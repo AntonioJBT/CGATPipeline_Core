@@ -1,29 +1,12 @@
-.. image:: https://travis-ci.org/CGATOxford/CGATPipelines.svg?branch=master
-    :target: https://travis-ci.org/CGATOxford/CGATPipelines
+.. image:: https://travis-ci.org/AntonioJBT/CGATPipeline_core.svg?branch=master
+    :target: https://travis-ci.org/AntonioJBT/CGATPipeline_core
 
-==================
-The CGAT pipelines
-==================
+**This is a fork to test the minimal components of CGATPipelines:
 
-The CGAT_ pipelines package contains a set of ruffus_ based pipelines to
-run workflows in comparative genomics or and NGS analysis.
+    CGATPipelines/Pipeline
+    scripts/pipeline_quickstart.py**
+    
+The real CGATPipelines are here_.
 
-We are currently in the process of building this package, please come
-back and visit soon.
- 
-For questions, please subscribe and contact us at the 
-`CGAT user group
-<https://groups.google.com/forum/?fromgroups#!forum/cgat-user-group>`_.
-
-Documentation of CGAT tools is available 
-`here <http://www.cgat.org/downloads/public/cgatpipelines/documentation>`_.
-
-Note that we currently are not able to fully support and document the 
-pipelines. They are under continuous development and changing rapidly.
-However, they might give some ideas or building blocks when developing
-your own pipelines.
-
-.. _ruffus: http://www.ruffus.org.uk
-.. _CGAT: http://www.cgat.org
-
+.. _here: https://github.com/CGATOxford/CGATPipelines
 
