@@ -31,7 +31,7 @@ ruffus>=2.4
 #https://bitbucket.org/james_taylor/bx-python/get/tip.tar.bz2
 #-e hg+http://bitbucket.org/james_taylor/bx-python#egg=bx-python-0.7.2
 
-sphinx>=1.0.5
+#sphinx>=1.0.5
 #sphinxcontrib-programoutput>=0.8
 #sqlalchemy>=0.7.0
 #weblogo>=3.0
@@ -40,5 +40,5 @@ sphinx>=1.0.5
 #ggplot>=0.11.5
 #xlwt>=0.7.4
 #pybedtools>=0.6.5
-pep8>=1.4.0
-CGATReport
+#pep8>=1.4.0
+#CGATReport
