@@ -1,28 +1,28 @@
 # latest setutools required for automatic cythonization
 
 setuptools>=1.1
-pyparsing>=1.5.7
-cython>=0.19
+#pyparsing>=1.5.7
+#cython>=0.19
 #numpy>=1.7
 
 # not available in py3, use mysql-client instead
 # MySQL-python>1.2.3
 
-PyYAML>=3.1.0
-alignlib-lite>=0.2.3
+#PyYAML>=3.1.0
+#alignlib-lite>=0.2.3
 #biopython>=1.61
 drmaa>=0.5
 
 #matplotlib-venn>=0.5
 #matplotlib>=1.3.0
 
-networkx>=1.8.1
-openpyxl>=1.5.7
+#networkx>=1.8.1
+#openpyxl>=1.5.7
 
 #pandas>=0.12.0
-pysam>=0.8.4
-rdflib>=0.4.1
-psycopg2>=2.5
+#pysam>=0.8.4
+#rdflib>=0.4.1
+#psycopg2>=2.5
 
 #rpy2>=2.6
 ruffus>=2.4
@@ -32,9 +32,9 @@ ruffus>=2.4
 #-e hg+http://bitbucket.org/james_taylor/bx-python#egg=bx-python-0.7.2
 
 sphinx>=1.0.5
-sphinxcontrib-programoutput>=0.8
-sqlalchemy>=0.7.0
-weblogo>=3.0
+#sphinxcontrib-programoutput>=0.8
+#sqlalchemy>=0.7.0
+#weblogo>=3.0
 
 # not in py3
 #ggplot>=0.11.5
