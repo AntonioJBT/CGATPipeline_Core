@@ -40,8 +40,8 @@ from __future__ import absolute_import
 
 #from builtins import open
 #from builtins import str
-from future import standard_library
-standard_library.install_aliases()
+#from future import standard_library
+#standard_library.install_aliases()
 
 # To use a consistent encoding
 from codecs import open
