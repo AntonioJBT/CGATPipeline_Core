@@ -25,7 +25,7 @@ drmaa>=0.5
 #rdflib>=0.4.1
 #psycopg2>=2.5
 
-rpy2>=2.6
+#rpy2>=2.6
 ruffus>=2.4
 
 #scipy>=0.11

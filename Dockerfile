@@ -54,6 +54,8 @@ RUN apt-get update && apt-get install -y \
 RUN conda install -c r r-essentials \
     && conda update -c r r-essentials
 
+RUN pip install --upgrade rpy2
+
 #########################
 # Install package to test 
 #########################
