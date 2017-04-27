@@ -8,7 +8,8 @@
 # Base image
 ############
 
-FROM continuumio/miniconda
+#FROM continuumio/miniconda
+FROM continuumio/anaconda
 
 #FROM jfloff/alpine-python:2.7
 # https://github.com/jfloff/alpine-python
@@ -42,10 +43,12 @@ RUN apt-get update && apt-get install -y \
 # Install Python packages
 #########################
 
-RUN pip install --upgrade pip setuptools future \
-                              numpy scipy matplotlib pandas sympy nose \
-                              Cython pysam CGATReport \
-    && pip list
+#RUN pip install --upgrade pip setuptools future \
+#                              scipy pandas \
+#    && pip list
+
+#RUN conda update conda \
+#    && conda install numpy 
 
 #########################
 # Install package to test 
