@@ -25,7 +25,7 @@ except ImportError:
         "the CGAT code collection requires cython to "
         "be installed before running setup.py (pip install cython)")
 
-try: 
+try:
     import pysam
 except ImportError:
     raise ImportError(
@@ -101,7 +101,7 @@ for tool, toolkit, expected in external_dependencies:
 # Define dependencies 
 #
 # Perform a CGAT Code Collection Installation
-INSTALL_CGAT_CODE_COLLECTION = True
+#INSTALL_CGAT_CODE_COLLECTION = True
 
 major, minor1, minor2, s, tmp = sys.version_info
 
