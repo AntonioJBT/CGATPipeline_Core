@@ -39,9 +39,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     vim
 
-#########################
-# Install Python packages
-#########################
+#############################
+# Install additional packages
+#############################
 
 #RUN pip install --upgrade pip setuptools future \
 #                              scipy pandas \
@@ -49,6 +49,10 @@ RUN apt-get update && apt-get install -y \
 
 #RUN conda update conda \
 #    && conda install numpy 
+
+# Install R:
+RUN conda install -c r r-essentials \
+    && conda update -c r r-essentials
 
 #########################
 # Install package to test 
