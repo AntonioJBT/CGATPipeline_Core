@@ -43,6 +43,8 @@ RUN apt-get update && apt-get install -y \
 #########################
 
 RUN pip install --upgrade pip setuptools future \
+                              numpy scipy matplotlib pandas sympy nose \
+                              Cython pysam CGATReport \
     && pip list
 
 #########################
