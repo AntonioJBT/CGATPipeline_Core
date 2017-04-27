@@ -49,7 +49,7 @@ RUN apk update && apk upgrade \
 # Install Python packages
 #########################
 
-RUN pip install --upgrade pip setuptools future Cython pysam \
+RUN pip install --upgrade pip setuptools future \
     && pip list
 
 #########################

@@ -54,7 +54,7 @@ if LooseVersion(setuptools.__version__) < LooseVersion('1.1'):
     raise ImportError(
         "the CGAT code collection requires setuptools 1.1 higher")
 
-from Cython.Distutils import build_ext
+#from Cython.Distutils import build_ext
 
 ########################################################################
 ########################################################################
@@ -73,10 +73,10 @@ version = version.__version__
 # Check for external dependencies
 #
 # Not exhaustive, simply execute a representative tool from a toolkit.
-external_dependencies = (
-    ("wigToBigWig", "UCSC tools", 255),
-    ("bedtools", "bedtools", 0),
-    )
+#external_dependencies = (
+#    ("wigToBigWig", "UCSC tools", 255),
+#    ("bedtools", "bedtools", 0),
+#    )
 
 for tool, toolkit, expected in external_dependencies:
     try:
@@ -92,9 +92,9 @@ for tool, toolkit, expected in external_dependencies:
         print(("WARNING: depency check for %s failed: %s" % (toolkit, msg)))
 
     # UCSC tools return 255 when called without arguments
-    if retcode != expected:
-        print(("WARNING: depency check for %s(%s) failed, error %i" %
-               (toolkit, tool, retcode)))
+#    if retcode != expected:
+#        print(("WARNING: depency check for %s(%s) failed, error %i" %
+#               (toolkit, tool, retcode)))
 
 ###############################################################
 ###############################################################
@@ -139,6 +139,7 @@ REPO_REQUIREMENT = re.compile(
     r'^-e (?P<link>(?P<vcs>git|svn|hg|bzr).+#egg=(?P<package>.+)-(?P<version>\d(?:\.\d)*))$')
 HTTPS_REQUIREMENT = re.compile(
     r'^-e (?P<link>.*).+#(?P<package>.+)-(?P<version>\d(?:\.\d)*)$')
+
 install_requires = []
 dependency_links = []
 
@@ -165,17 +166,18 @@ for requirement in (
 
     install_requires.append(requirement)
 
-if major == 2:
-    install_requires.extend(['web.py>=0.37',
-                             'xlwt>=0.7.4',
-                             'matplotlib-venn>=0.5'])
-elif major == 3:
-    pass
+#if major == 2:
+#    install_requires.extend(['web.py>=0.37',
+#                             'xlwt>=0.7.4',
+#                             'matplotlib-venn>=0.5'])
+#elif major == 3:
+#    pass
 
-if INSTALL_CGAT_CODE_COLLECTION:
-    cgat_packages = find_packages(exclude=["CGATPipelines*", "scripts*"])
-else:
-    cgat_packages = find_packages(exclude=["scripts*"])
+#if INSTALL_CGAT_CODE_COLLECTION:
+#    cgat_packages = find_packages(exclude=["CGATPipelines*", "scripts*"])
+#else:
+
+cgat_packages = find_packages(exclude=["scripts*"])
 
 # rename scripts to CGATScripts
 cgat_packages.append("CGATScripts")
@@ -224,9 +226,9 @@ setup(
     install_requires=install_requires,
     dependency_links=dependency_links,
     # extension modules
-    ext_modules=[],
-    cmdclass={'build_ext': build_ext},
+#    ext_modules=[],
+#    cmdclass={'build_ext': build_ext},
     # other options
     zip_safe=False,
-    test_suite="tests",
+#    test_suite="tests",
 )
