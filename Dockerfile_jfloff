@@ -8,9 +8,10 @@
 # Base image
 ############
 
-FROM continuumio/miniconda
+# FROM python:3-onbuild 
+# FROM ubuntu:17.04
 
-#FROM jfloff/alpine-python:2.7
+FROM jfloff/alpine-python:2.7
 # https://github.com/jfloff/alpine-python
 # This is a minimal Python 3 image that can start from python or bash
 
@@ -31,12 +32,18 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 # Install system dependencies
 # For Alpine see:
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-RUN apt-get update && apt-get install -y \
+RUN apk update && apk upgrade \
+    && apk add \
+    tree \
+    sudo \
+    vim \ 
     wget \
     bzip2 \
-    fixincludes \
     unzip
 
+# For Ubuntu from here:
+#https://github.com/CGATOxford/CGATPipelines/blob/master/install-CGAT-tools.sh
+#gcc g++ zlib1g-dev libssl-dev libssl1.0.0 libbz2-dev libfreetype6-dev libpng12-dev libblas-dev libatlas-dev liblapack-dev gfortran libpq-dev r-base-dev libreadline-dev libmysqlclient-dev libboost-dev libsqlite3-dev
 
 #########################
 # Install Python packages
