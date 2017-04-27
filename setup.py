@@ -1,28 +1,74 @@
-import glob
+'''
+setup for |project_name|
+
+Python packaging can become a nightmare, check the following for reference:
+For example on setting a Python package, see:
+https://packaging.python.org/en/latest/distributing.html
+https://github.com/pypa/sampleproject
+https://python-packaging.readthedocs.io/en/latest/index.html
+http://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/index.html
+
+For Python 3.5
+Before packaging or installing run:
+
+    pip install -U pip twine check-manifest setuptools
+
+TO DO: to add tests see https://python-packaging.readthedocs.io/en/latest/testing.html
+
+To package, do something like this:
+
+    check-manifest
+    python setup.py check
+    python setup.py sdist bdist_wheels
+
+which will create a dist/ directory and a compressed file inside with your package.
+
+More notes and references in:
+    https://github.com/EpiCompBio/welcome
+
+And in the Python docs.
+Upload to PyPI after this if for general use.
+'''
+#################
+# Get modules
+
+# Py3 to 2 from pasteurize:
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+
+from builtins import open
+from builtins import str
+from future import standard_library
+standard_library.install_aliases()
+
+# To use a consistent encoding
+from codecs import open
+
+# Standard modules:
 import sys
 import os
-import subprocess
-import re
+import glob
 
-# Import setuptools
-# Use existing setuptools, otherwise try ez_setup.
-try:
-    import setuptools
-except ImportError:
-    # try to get via ez_setup
-    # ez_setup did not work on all machines tested as
-    # it uses curl with https protocol, which is not
-    # enabled in ScientificLinux
-    import ez_setup
-    ez_setup.use_setuptools()
+# Always prefer setuptools over distutils:
+import setuptools
 
-from setuptools import setup, find_packages, Extension
+from setuptools import setup, find_packages
+
+# To run custom install warning use:
+from setuptools.command.install import install
 
 from distutils.version import LooseVersion
 if LooseVersion(setuptools.__version__) < LooseVersion('1.1'):
-    print(("Version detected:", LooseVersion(setuptools.__version__)))
+    print ("Version detected:", LooseVersion(setuptools.__version__))
     raise ImportError(
-        "the CGAT code collection requires setuptools 1.1 higher")
+        "Setuptools 1.1 or higher is required")
+
+# Get location to this file:
+here = os.path.abspath(os.path.dirname(__file__))
+print(here)
+
 
 ################################
 # collect CGAT version
