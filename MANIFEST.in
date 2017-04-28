@@ -31,4 +31,11 @@ recursive-include CGATPipelines *png
 recursive-include CGATPipelines *rst
 recursive-include CGATPipelines *svg
 
+# From theme directory:
+recursive-include CGATPipelines *html
+recursive-include CGATPipelines *conf
+
+recursive-include CGATPipelines *css_t
+recursive-include CGATPipelines *js
+
 # extensions
