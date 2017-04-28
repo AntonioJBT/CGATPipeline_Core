@@ -66,7 +66,9 @@ RUN cd home \
     && git clone https://github.com/AntonioJBT/CGATPipeline_core.git \
     && cd CGATPipeline_core \
     && python setup.py install \
-    && cd ..
+    && cd .. \
+    && mkdir CGAT_tests \
+    && cd CGAT_tests
 
 
 ###############################
