@@ -27,5 +27,8 @@ include CGAT/*.py
 
 # Configuration and data files:
 recursive-include CGATPipelines *ini
+recursive-include CGATPipelines *png
+recursive-include CGATPipelines *rst
+recursive-include CGATPipelines *svg
 
 # extensions

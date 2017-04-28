@@ -47,14 +47,15 @@ RUN apt-get update && apt-get install -y \
 #                              scipy pandas \
 #    && pip list
 
-#RUN conda update conda \
-#    && conda install numpy 
+#RUN conda update conda
 
 # Install R:
 RUN conda install -c r r-essentials \
-    && conda update -c r r-essentials
+    && conda update -c r r-essentials \
+    && conda install rpy2
 
-RUN pip install --upgrade rpy2
+# rpy2 is not in r-essentials, Dockerfile installation with pip errors, use
+# conda install
 
 #########################
 # Install package to test 
