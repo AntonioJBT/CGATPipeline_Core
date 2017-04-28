@@ -8,8 +8,8 @@
 # Base image
 ############
 
-#FROM continuumio/miniconda
-FROM continuumio/anaconda
+FROM continuumio/miniconda
+#FROM continuumio/anaconda
 
 #FROM jfloff/alpine-python:2.7
 # https://github.com/jfloff/alpine-python

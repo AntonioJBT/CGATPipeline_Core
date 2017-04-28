@@ -141,7 +141,7 @@ setup(
     package_dir=cgat_package_dirs,
     include_package_data=True,
     entry_points={
-        'console_scripts': ['pipeline_quickstart = scripts.pipeline_quickstart:main']
+        'console_scripts': ['pipeline_quickstart = CGATScripts.pipeline_quickstart:main']
     },
     # dependencies
     install_requires=install_requires,
