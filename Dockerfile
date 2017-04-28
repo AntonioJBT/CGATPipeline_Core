@@ -56,6 +56,8 @@ RUN conda install -c r r-essentials \
     && conda update -c r r-essentials \
     && conda install rpy2
 
+# conda create -n py35 python=3.5
+
 # rpy2 is not in r-essentials, Dockerfile installation with pip errors, use
 # conda install
 
