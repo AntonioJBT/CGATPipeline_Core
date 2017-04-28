@@ -8,8 +8,10 @@
 # Base image
 ############
 
-FROM continuumio/miniconda
-#FROM continuumio/anaconda
+# FROM continuumio/miniconda # probably OK but needs dependencies sorting out
+# and maybe conflicts with Requirements.py
+# FROM continuumio/anaconda # works
+FROM continuumio/anaconda3
 
 #FROM jfloff/alpine-python:2.7
 # https://github.com/jfloff/alpine-python
