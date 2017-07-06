@@ -5,8 +5,6 @@
 
     CGATPipelines/Pipeline
     
-    scripts/pipeline_quickstart.py
-    
 The real CGATPipelines are here_.
 
 .. _here: https://github.com/CGATOxford/CGATPipelines
