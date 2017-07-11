@@ -33,23 +33,32 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 #########################
 
 # Install system dependencies
-# For Alpine see:
-# https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-RUN apt-get update && apt-get install -y \
-    wget
+
+# For anaconda:
+#RUN apt-get update && apt-get install -y \
+#    wget
 #    bzip2 \
 #    fixincludes \
 #    unzip \
 #    vim
 
+# For Alpine:
+# https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
+RUN apk update && apk upgrade \
+     && apk add \
+     sudo
+
 #############################
 # Install additional packages
 #############################
 
-#RUN pip install --upgrade pip setuptools future \
-#                              scipy pandas \
-#    && pip list
+RUN pip install --upgrade pip \
+                          setuptools \
+                          future \
+                          ruffus \
+    && pip list
 
+# If running with anaconda:
 #RUN conda update conda
 
 # Install R:
