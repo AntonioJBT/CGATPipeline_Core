@@ -11,9 +11,10 @@
 # FROM continuumio/miniconda # probably OK but needs dependencies sorting out
 # and maybe conflicts with Requirements.py
 # FROM continuumio/anaconda # works
-FROM continuumio/anaconda3
+# FROM continuumio/anaconda3
 
-#FROM jfloff/alpine-python:2.7
+# FROM jfloff/alpine-python:2.7
+FROM jfloff/alpine-python
 # https://github.com/jfloff/alpine-python
 # This is a minimal Python 3 image that can start from python or bash
 
@@ -35,11 +36,11 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 # For Alpine see:
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
 RUN apt-get update && apt-get install -y \
-    wget \
-    bzip2 \
-    fixincludes \
-    unzip \
-    vim
+    wget
+#    bzip2 \
+#    fixincludes \
+#    unzip \
+#    vim
 
 #############################
 # Install additional packages
@@ -52,9 +53,9 @@ RUN apt-get update && apt-get install -y \
 #RUN conda update conda
 
 # Install R:
-RUN conda install -c r r-essentials \
-    && conda update -c r r-essentials \
-    && conda install rpy2
+#RUN conda install -c r r-essentials \
+#    && conda update -c r r-essentials \
+#    && conda install rpy2
 
 # conda create -n py35 python=3.5
 
