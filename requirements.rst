@@ -3,8 +3,8 @@
 brewer2mpl
 setuptools>=1.1
 #pyparsing>=1.5.7
-#cython>=0.19
-#numpy>=1.7
+cython>=0.19
+numpy>=1.7
 
 # not available in py3, use mysql-client instead
 # MySQL-python>1.2.3
@@ -20,7 +20,7 @@ drmaa>=0.5
 #networkx>=1.8.1
 #openpyxl>=1.5.7
 
-#pandas>=0.12.0
+pandas>=0.12.0
 #pysam>=0.8.4
 #rdflib>=0.4.1
 #psycopg2>=2.5
@@ -41,5 +41,5 @@ ruffus>=2.4
 #ggplot>=0.11.5
 #xlwt>=0.7.4
 #pybedtools>=0.6.5
-#pep8>=1.4.0
+pep8>=1.4.0
 #CGATReport

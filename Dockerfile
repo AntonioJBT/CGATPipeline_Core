@@ -56,6 +56,8 @@ RUN pip install --upgrade pip \
                           setuptools \
                           future \
                           ruffus \
+                          numpy \
+                          pandas \
     && pip list
 
 # If running with anaconda:
@@ -80,10 +82,7 @@ RUN cd home \
     && git clone https://github.com/AntonioJBT/CGATPipeline_core.git \
     && cd CGATPipeline_core \
     && python setup.py install \
-    && cd .. \
-    && mkdir CGAT_tests \
-    && cd CGAT_tests
-
+    && cd ..
 
 ###############################
 # Install external dependencies
