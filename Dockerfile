@@ -54,10 +54,7 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 # Install additional packages
 #############################
 
-RUN pip install --upgrade pip \
-RUN pip install -r requirements.rst \
-    && pip list
-
+RUN pip install --upgrade pip
 #                          setuptools \
 #                          future \
 #                          ruffus \
@@ -89,6 +86,8 @@ RUN cd home \
     && cd CGATPipeline_core \
     && python setup.py install \
     && cd ..
+
+RUN pip install -r requirements.txt
 
 ###############################
 # Install external dependencies
