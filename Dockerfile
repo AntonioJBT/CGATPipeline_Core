@@ -36,7 +36,7 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 
 # Install system dependencies
 
-# For anaconda:
+# For anaconda/miniconda:
 #RUN apt-get update && apt-get install -y \
 #    gcc
 #    wget \
@@ -45,12 +45,12 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 #    unzip \
 #    vim
 
-# For Alpine and miniconda:
+# For Alpine:
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-RUN apk update && apk upgrade \
-     && apk add \
-     sudo \
-     gcc
+#RUN apk update && apk upgrade \
+#     && apk add \
+#     sudo \
+#     gcc
 
 
 #############################
