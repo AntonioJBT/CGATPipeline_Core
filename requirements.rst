@@ -5,13 +5,13 @@ pyyaml
 numpy
 pandas
 drmaa
-pep8
-flake8
+#pep8
+#flake8
 
 #####################
 
-brewer2mpl
-setuptools>=1.1
+#brewer2mpl
+#setuptools>=1.1
 #pyparsing>=1.5.7
 #cython>=0.19
 #numpy>=1.7

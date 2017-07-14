@@ -55,13 +55,16 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 #############################
 
 RUN pip install --upgrade pip \
-                          setuptools \
-                          future \
-                          ruffus \
-                          numpy \
-                          pandas \
-                          pyyaml \
+RUN pip install -r requirements.rst \
     && pip list
+
+#                          setuptools \
+#                          future \
+#                          ruffus \
+#                          numpy \
+#                          pandas \
+#                          pyyaml \
+#    && pip list
 
 # If running with anaconda:
 #RUN conda update conda
