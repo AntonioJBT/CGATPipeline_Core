@@ -1,12 +1,12 @@
 # latest setutools required for automatic cythonization
 
 ruffus
-pyyaml
+PyYAML>=3.1.0
 numpy
 pandas
 drmaa
-#pep8
-#flake8
+pep8
+flake8
 
 #####################
 

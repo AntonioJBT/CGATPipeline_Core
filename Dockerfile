@@ -36,19 +36,22 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 
 # Install system dependencies
 
-# For anaconda/miniconda:
+# For anaconda:
 #RUN apt-get update && apt-get install -y \
-#    wget
+#    gcc
+#    wget \
 #    bzip2 \
 #    fixincludes \
 #    unzip \
 #    vim
 
-# For Alpine:
+# For Alpine and miniconda:
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-#RUN apk update && apk upgrade \
-#     && apk add \
-#     sudo
+RUN apk update && apk upgrade \
+     && apk add \
+     sudo \
+     gcc
+
 
 #############################
 # Install additional packages
@@ -88,10 +91,11 @@ RUN conda install -c r r \
 RUN cd home \
     && git clone https://github.com/AntonioJBT/CGATPipeline_core.git \
     && cd CGATPipeline_core \
+    && pip install -r requirements.rst \
     && python setup.py install \
     && cd ..
 
-RUN pip install -r requirements.txt
+#RUN pip install -r requirements.txt
 
 ###############################
 # Install external dependencies
