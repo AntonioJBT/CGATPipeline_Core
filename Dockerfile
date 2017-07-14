@@ -66,10 +66,14 @@ RUN pip install --upgrade pip
 # If running with anaconda:
 #RUN conda update conda
 
-# Install R:
-RUN conda install -c r r-essentials \
-    && conda update -c r r-essentials \
+# Install base R:
+RUN conda install -c r r \
     && conda install rpy2
+
+# Install many essential packages:
+#RUN conda install -c r r-essentials \
+#    && conda update -c r r-essentials \
+#    && conda install rpy2
 
 # conda create -n py35 python=3.5
 
