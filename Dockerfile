@@ -14,9 +14,11 @@
 # FROM continuumio/anaconda3
 
 # FROM jfloff/alpine-python:2.7
-FROM jfloff/alpine-python
+# FROM jfloff/alpine-python
 # https://github.com/jfloff/alpine-python
 # This is a minimal Python 3 image that can start from python or bash
+
+FROM continuumio/miniconda3
 
 # Or simply run:
 # docker run --rm -ti jfloff/alpine-python bash
@@ -34,7 +36,7 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 
 # Install system dependencies
 
-# For anaconda:
+# For anaconda/miniconda:
 #RUN apt-get update && apt-get install -y \
 #    wget
 #    bzip2 \
@@ -44,9 +46,9 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 
 # For Alpine:
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
-RUN apk update && apk upgrade \
-     && apk add \
-     sudo
+#RUN apk update && apk upgrade \
+#     && apk add \
+#     sudo
 
 #############################
 # Install additional packages
@@ -58,15 +60,16 @@ RUN pip install --upgrade pip \
                           ruffus \
                           numpy \
                           pandas \
+                          pyyaml \
     && pip list
 
 # If running with anaconda:
 #RUN conda update conda
 
 # Install R:
-#RUN conda install -c r r-essentials \
-#    && conda update -c r r-essentials \
-#    && conda install rpy2
+RUN conda install -c r r-essentials \
+    && conda update -c r r-essentials \
+    && conda install rpy2
 
 # conda create -n py35 python=3.5
 

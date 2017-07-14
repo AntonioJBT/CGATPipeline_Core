@@ -1,10 +1,20 @@
 # latest setutools required for automatic cythonization
 
+ruffus
+pyyaml
+numpy
+pandas
+drmaa
+pep8
+flake8
+
+#####################
+
 brewer2mpl
 setuptools>=1.1
 #pyparsing>=1.5.7
-cython>=0.19
-numpy>=1.7
+#cython>=0.19
+#numpy>=1.7
 
 # not available in py3, use mysql-client instead
 # MySQL-python>1.2.3
@@ -12,7 +22,7 @@ numpy>=1.7
 #PyYAML>=3.1.0
 #alignlib-lite>=0.2.3
 #biopython>=1.61
-drmaa>=0.5
+#drmaa>=0.5
 
 #matplotlib-venn>=0.5
 #matplotlib>=1.3.0
@@ -20,13 +30,13 @@ drmaa>=0.5
 #networkx>=1.8.1
 #openpyxl>=1.5.7
 
-pandas>=0.12.0
+#pandas>=0.12.0
 #pysam>=0.8.4
 #rdflib>=0.4.1
 #psycopg2>=2.5
 
 #rpy2>=2.6
-ruffus>=2.4
+#ruffus>=2.4
 
 #scipy>=0.11
 #https://bitbucket.org/james_taylor/bx-python/get/tip.tar.bz2
@@ -41,5 +51,5 @@ ruffus>=2.4
 #ggplot>=0.11.5
 #xlwt>=0.7.4
 #pybedtools>=0.6.5
-pep8>=1.4.0
+#pep8>=1.4.0
 #CGATReport
