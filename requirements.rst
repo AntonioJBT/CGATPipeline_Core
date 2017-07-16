@@ -1,5 +1,7 @@
-# latest setutools required for automatic cythonization
+# Python packages needed for Pipeline core module:
+# See 'requires.txt' for all packages needed for CGATPipelines
 
+brewer2mpl
 ruffus>=2.4
 PyYAML>=3.1.0
 scipy>=0.11

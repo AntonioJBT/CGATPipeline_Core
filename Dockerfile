@@ -37,13 +37,12 @@ MAINTAINER Antonio Berlanga-Taylor <a.berlanga@imperial.ac.uk>
 # Install system dependencies
 
 # For anaconda/miniconda:
-#RUN apt-get update && apt-get install -y \
-#    gcc
-#    wget \
-#    bzip2 \
-#    fixincludes \
-#    unzip \
-#    vim
+RUN apt-get update && apt-get install -y \
+    wget \
+    bzip2 \
+    fixincludes \
+    unzip \
+    vim
 
 # For Alpine:
 # https://wiki.alpinelinux.org/wiki/Alpine_Linux_package_management
