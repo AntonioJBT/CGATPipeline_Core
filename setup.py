@@ -105,7 +105,7 @@ cgat_packages.append("CGATScripts")
 
 cgat_package_dirs = {'CGAT': 'CGAT',
                      'CGATScripts': 'scripts',
-                     'CGATPipelines': 'CGATPipelines'}
+                     'CGATPipeline_core': 'CGATPipelines'}
 
 ##########################################################
 ##########################################################
@@ -125,7 +125,7 @@ Operating System :: MacOS
 
 setup(
     # package information
-    name='CGATPipelines',
+    name='CGATPipeline_core',
     version=version,
     description='CGAT : the Computational Genomics Analysis Toolkit',
     author='Andreas Heger',
