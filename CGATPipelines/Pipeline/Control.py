@@ -49,6 +49,7 @@ import sys
 import tempfile
 import time
 import io
+import glob
 
 from multiprocessing.pool import ThreadPool
 
@@ -1040,8 +1041,11 @@ def main(args=sys.argv):
         f = sys._getframe(1)
         caller = inspect.getargvalues(f).locals["__file__"]
         pipeline_path = os.path.splitext(caller)[0]
-        general_path = os.path.join(os.path.dirname(pipeline_path),
-                                    "configuration")
+        config_dir = glob.glob(os.path.join(os.path.dirname(pipeline_path),
+                                        "configuration*"))
+        general_path = config_dir
+        #os.path.join(os.path.dirname(pipeline_path),
+        #                                "configuration")
         writeConfigFiles(pipeline_path, general_path)
 
     elif options.pipeline_action == "clone":
