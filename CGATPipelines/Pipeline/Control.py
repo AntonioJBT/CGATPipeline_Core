@@ -1041,6 +1041,7 @@ def main(args=sys.argv):
         f = sys._getframe(1)
         caller = inspect.getargvalues(f).locals["__file__"]
         pipeline_path = os.path.splitext(caller)[0]
+        # Added by Antonio:
         config_dir = glob.glob(os.path.join(os.path.dirname(pipeline_path),
                                         "configuration*"))
         general_path = config_dir
