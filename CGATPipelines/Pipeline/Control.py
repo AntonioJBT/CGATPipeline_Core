@@ -73,7 +73,7 @@ def writeConfigFiles(pipeline_path, general_path):
 
     paths = [pipeline_path, general_path]
     print(paths)
-    config_files = ['pipeline.ini', 'conf.py']
+    config_files = [r'pipeline*.ini', 'conf.py']
 
     for dest in config_files:
         if os.path.exists(dest):
