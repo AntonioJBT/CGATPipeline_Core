@@ -79,10 +79,10 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     # See also bottom of script for changes when calling the 'config' option 
     # Antonio
     paths = [pipeline_path, pipeline_path_2, general_path]
-    print(paths)
-    os.mkdir('report') # Sphinx config files will be copied here
-                       # CGATReport only needs its conf.py to generate the rest
-                       # though
+    report_dir = 'pipeline_report'
+    os.mkdir(report_dir) # Sphinx config files will be copied here
+                         # CGATReport only needs its conf.py to generate the rest
+                         # though
 
     # Look for ini file:
     f_count = 0
@@ -94,15 +94,6 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                     INI_file = f
     if f_count == 1:
         config_files = [INI_file] # This is for the pipeline only
-        sphinx_config_files = ['conf.py',
-                               'Makefile',
-                               'make.bat',
-                               'report_pipeline_template.rst',
-                               'include_links.rst',
-                               'index.rst',
-                               ] # These are for a sphinx setup, not needed
-                                 # with CGATReport
-
 
     else:
         raise ValueError('''You have no project configuration (".ini") file
@@ -126,34 +117,77 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                 E.info("created new configuration file `%s` " % dest)
                 break
         else:
-            raise ValueError(
-                "default config file for `%s` not found in %s" %
-                (config_files, paths))
+            raise ValueError('''default config file for `%s`
+                                not found in
+                                %s
+                                A pipeline cannot be run without this.
+                             ''' % (config_files, paths))
 
     # Copy Sphinx configuration files, enforce copy of 'conf.py' in case
     # CGATReport is used:
-    dest = sphinx_config_files[0]
+    dest = 'conf.py'
     if os.path.exists(dest):
         E.warn("file `%s` already exists - skipped" % dest)
 
     for path in paths:
         src = os.path.join(path, dest)
         if os.path.exists(src):
-            shutil.copyfile(src, os.path.join('report', dest)) # Put sphinx
-                                                               # files in 
-                                                               # separate
-                                                               # dir
-            # Create a softlink outside of 'report' dir for CGATReport:
-            os.symlink(os.path.join('report', dest), str(dest))
+            # Put sphinx files in separate dir:
+            shutil.copyfile(src, os.path.join(report_dir, dest))
+            # Create a softlink outside of report_dir dir for CGATReport:
+            os.symlink(os.path.join(report_dir, dest), str(dest))
             E.info("created new configuration file `%s` " % dest)
             break
 
     else:
-        raise ValueError('''default config file for `%s` not found in
-                            %s''' % (dest, paths))
+        # Only warn as pipeline can be run without report:
+        E.warn('''default config file for `%s` not found in
+                  %s
+                  CGATReport nor Sphinx can be run without this''' % (dest, paths))
 
-    # If other Sphinx config files are found, copy them:
-    for dest in sphinx_config_files[1:]:
+    # If other Sphinx config files are found, copy them if there is a skeleton
+    # pipeline report to use:
+    E.info('Looking for additional Sphinx configuration files.')
+    sphinx_config_files = ['Makefile',
+                           'make.bat',
+                           'include_links.rst',
+                           'index.rst',
+                           ] # These are for a sphinx setup, not needed
+                             # with CGATReport
+                             # A 'report_pipeline_*.rst' template is
+                             # searched for below
+
+    # Look for a pipeline report file:
+    f_count = 0
+    for path in paths:
+        if os.path.exists(path):
+            for f in os.listdir(os.path.abspath(path)):
+                # TO DO:
+                # This pattern matching is particular to 
+                # https://github.com/AntonioJBT/project_quickstart
+                # Needs to be made more generic
+                if fnmatch.fnmatch(f, 'report_pipeline_*.rst'):
+                    f_count += 1
+                    pipeline_report_file = f
+
+    if f_count == 1:
+        sphinx_config_files.append(pipeline_report_file)
+
+    else:
+        # Only warn as pipeline can be run without report:
+        E.warn('''There is no pipeline report file matching
+                  report_pipeline_*.rst
+                  in the directories:
+                  {}
+                  {}
+                  or
+                  {}
+                  Ignore this if you are using CGATReport.
+                  '''.format(pipeline_path, pipeline_path_2, general_path)
+                  )
+
+    # Copy the files across if they are found:
+    for dest in sphinx_config_files:
         if os.path.exists(dest):
             E.warn("file `%s` already exists - skipped" % dest)
             continue
@@ -161,17 +195,18 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
         for path in paths:
             src = os.path.join(path, dest)
             if os.path.exists(src):
-                shutil.copyfile(src, os.path.join('report', dest)) # Put sphinx
-                                                                   # files in 
-                                                                   # separate
-                                                                   # dir
+                # Put sphinx files in separate dir:
+                shutil.copyfile(src, os.path.join(report_dir, dest))
                 E.info("created new configuration file `%s` " % dest)
                 break
 
         else:
-            E.warn('''default config file for `%s` not found in
-                      %s
-                      Continuing without these.''' % (dest, paths))
+            E.warn('''No sphinx-quickstart skeleton files such as:
+                      {}
+                      were found
+                      in
+                      {}
+                      Continuing without.'''.format(dest, paths))
 
 def printConfigFiles():
     '''
