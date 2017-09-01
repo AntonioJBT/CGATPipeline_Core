@@ -134,7 +134,6 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     # CGATReport is used:
     if os.path.exists(sphinx_config_files[0]):
         E.warn("file `%s` already exists - skipped" % dest)
-        continue
 
     for path in paths:
         src = os.path.join(path, sphinx_config_files[0])
