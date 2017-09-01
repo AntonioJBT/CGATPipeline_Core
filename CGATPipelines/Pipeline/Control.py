@@ -155,8 +155,8 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     # If other Sphinx config files are found, copy them:
     for dest in sphinx_config_files[1:]:
         if os.path.exists(dest):
-        E.warn("file `%s` already exists - skipped" % dest)
-        continue
+            E.warn("file `%s` already exists - skipped" % dest)
+            continue
 
         for path in paths:
             src = os.path.join(path, dest)
@@ -165,8 +165,8 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                                                                    # files in 
                                                                    # separate
                                                                    # dir
-            E.info("created new configuration file `%s` " % dest)
-            break
+                E.info("created new configuration file `%s` " % dest)
+                break
 
         else:
             E.warn('''default config file for `%s` not found in
