@@ -132,11 +132,12 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
 
     # Copy Sphinx configuration files, enforce copy of 'conf.py' in case
     # CGATReport is used:
-    if os.path.exists(sphinx_config_files[0]):
+    dest = sphinx_config_files[0]
+    if os.path.exists(dest):
         E.warn("file `%s` already exists - skipped" % dest)
 
     for path in paths:
-        src = os.path.join(path, sphinx_config_files[0])
+        src = os.path.join(path, dest)
         if os.path.exists(src):
             shutil.copyfile(src, os.path.join('report', dest)) # Put sphinx
                                                                # files in 
@@ -149,7 +150,7 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
 
     else:
         raise ValueError('''default config file for `%s` not found in
-                            %s''' % (sphinx_config_files[0], paths))
+                            %s''' % (dest, paths))
 
     # If other Sphinx config files are found, copy them:
     for dest in sphinx_config_files[1:]:
