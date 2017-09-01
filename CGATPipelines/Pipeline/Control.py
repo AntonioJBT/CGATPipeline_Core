@@ -1140,14 +1140,19 @@ def main(args=sys.argv):
             # version would only have pipe_XX/
             # so creating an additional pipeline_path
             # TO DO: clean this up
-        pipeline_path = str(os.path.splitext(caller)[0])
-        pipeline_path_2 = str(pipeline_path).split('/')[0]
+        pipeline_path = os.path.splitext(caller)[0]
+        pipeline_path_2 = os.path.dirname(pipeline_path)
             # CGATPipelines have a "configuration" folder
             # adding a glob to have a bit more flexibility
-        general_path = fnmatch.fnmatch(pipeline_path_2, '/configuration*')
-        #general_path = glob.glob(str(pipeline_path_2 + '/configuration' + '*'))[0]
-        #os.path.join(os.path.dirname(pipeline_path),
-        #                                "configuration")
+        general_path = glob.glob(str(os.path.abspath(pipeline_path_2) +
+                                 '/configuration*'))
+
+        if not general_path:
+            general_path = os.path.join(os.path.dirname(pipeline_path), "configuration")
+
+        else:
+            general_path = str(general_path[0])
+
         writeConfigFiles(pipeline_path, pipeline_path_2, general_path)
 
     elif options.pipeline_action == "clone":
