@@ -1144,7 +1144,8 @@ def main(args=sys.argv):
         pipeline_path_2 = str(pipeline_path).split('/')[0]
             # CGATPipelines have a "configuration" folder
             # adding a glob to have a bit more flexibility
-        general_path = glob.glob(str(pipeline_path_2 + '/configuration' + '*'))[0]
+        general_path = fnmatch.fnmatch(pipeline_path_2, '/configuration*')
+        #general_path = glob.glob(str(pipeline_path_2 + '/configuration' + '*'))[0]
         #os.path.join(os.path.dirname(pipeline_path),
         #                                "configuration")
         writeConfigFiles(pipeline_path, pipeline_path_2, general_path)
