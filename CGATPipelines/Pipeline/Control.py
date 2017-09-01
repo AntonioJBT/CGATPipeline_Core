@@ -28,6 +28,7 @@ import tempfile
 import time
 import io
 import glob
+import fnmatch
 
 from multiprocessing.pool import ThreadPool
 
@@ -67,13 +68,32 @@ PARAMS = {}
 GLOBAL_OPTIONS, GLOBAL_ARGS = None, None
 
 
-def writeConfigFiles(pipeline_path, general_path):
+def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     '''create default configuration files in `path`.
     '''
 
-    paths = [pipeline_path, general_path]
+    paths = [pipeline_path, pipeline_path_2, general_path]
     print(paths)
-    config_files = [r'pipeline*.ini', 'conf.py']
+
+    # Look for ini file:
+    f_count = 0
+    for path in paths:
+        if os.path.exists(path):
+            for f in os.listdir(os.path.abspath(path)):
+                if fnmatch.fnmatch(f, 'pipeline*ini'):
+                    f_count += 1
+                    INI_file = f
+    if f_count == 1:
+        config_files = [INI_file, 'conf.py']
+
+    else:
+        raise ValueError('''You have no project configuration (".ini") file
+                            or more than one in the directories:
+                            {}
+                            {}
+                            or
+                            {}'''.format(pipeline_path, pipeline_path_2, general_path)
+                           )
 
     for dest in config_files:
         if os.path.exists(dest):
@@ -1018,14 +1038,18 @@ def main(args=sys.argv):
     elif options.pipeline_action == "config":
         f = sys._getframe(1)
         caller = inspect.getargvalues(f).locals["__file__"]
+            # CGATPipelines have a pipe_XX/pipe_XX hierarchy, but a simplified
+            # version would only have pipe_XX/
+            # so creating an additional pipeline_path
+            # TO DO: clean this up
         pipeline_path = str(os.path.splitext(caller)[0])
-        # Added by Antonio:
-        config_dir = str(glob.glob(os.path.join(os.path.dirname(pipeline_path),
-                                        "configuration*")))
-        general_path = config_dir
+        pipeline_path_2 = str(pipeline_path).split('/')[0]
+            # CGATPipelines have a "configuration" folder
+            # adding a glob to have a bit more flexibility
+        general_path = glob.glob(str(pipeline_path_2 + '/configuration' + '*'))[0]
         #os.path.join(os.path.dirname(pipeline_path),
         #                                "configuration")
-        writeConfigFiles(pipeline_path, general_path)
+        writeConfigFiles(pipeline_path, pipeline_path_2, general_path)
 
     elif options.pipeline_action == "clone":
         clonePipeline(options.pipeline_targets[0])
