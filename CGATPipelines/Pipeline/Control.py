@@ -71,9 +71,18 @@ GLOBAL_OPTIONS, GLOBAL_ARGS = None, None
 def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     '''create default configuration files in `path`.
     '''
-
+    # TO DO: I've modified this function with workarounds to make it more
+    # flexible in order to find an ini file, find a configuration dir and 
+    # copy pre-run sphinx-quickstart files if they exist.
+    # Other than creating a 'report' dir, it should not change the way it is
+    # run from CGATPipelines.
+    # See also bottom of script for changes when calling the 'config' option 
+    # Antonio
     paths = [pipeline_path, pipeline_path_2, general_path]
     print(paths)
+    os.mkdir('report') # Sphinx config files will be copied here
+                       # CGATReport only needs its conf.py to generate the rest
+                       # though
 
     # Look for ini file:
     f_count = 0
@@ -84,7 +93,16 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                     f_count += 1
                     INI_file = f
     if f_count == 1:
-        config_files = [INI_file, 'conf.py']
+        config_files = [INI_file] # This is for the pipeline only
+        sphinx_config_files = ['conf.py',
+                               'Makefile',
+                               'make.bat',
+                               'report_pipeline_template.rst',
+                               'include_links.rst',
+                               'index.rst',
+                               ] # These are for a sphinx setup, not needed
+                                 # with CGATReport
+
 
     else:
         raise ValueError('''You have no project configuration (".ini") file
@@ -95,6 +113,7 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                             {}'''.format(pipeline_path, pipeline_path_2, general_path)
                            )
 
+    # Copy pipeline ini file:
     for dest in config_files:
         if os.path.exists(dest):
             E.warn("file `%s` already exists - skipped" % dest)
@@ -111,6 +130,48 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                 "default config file for `%s` not found in %s" %
                 (config_files, paths))
 
+    # Copy Sphinx configuration files, enforce copy of 'conf.py' in case
+    # CGATReport is used:
+    if os.path.exists(sphinx_config_files[0]):
+        E.warn("file `%s` already exists - skipped" % dest)
+        continue
+
+    for path in paths:
+        src = os.path.join(path, sphinx_config_files[0])
+        if os.path.exists(src):
+            shutil.copyfile(src, os.path.join('report', dest)) # Put sphinx
+                                                               # files in 
+                                                               # separate
+                                                               # dir
+            # Create a softlink outside of 'report' dir for CGATReport:
+            os.symlink(os.path.join('report', dest), str(dest))
+            E.info("created new configuration file `%s` " % dest)
+            break
+
+    else:
+        raise ValueError('''default config file for `%s` not found in
+                            %s''' % (sphinx_config_files[0], paths))
+
+    # If other Sphinx config files are found, copy them:
+    for dest in sphinx_config_files[1:]:
+        if os.path.exists(dest):
+        E.warn("file `%s` already exists - skipped" % dest)
+        continue
+
+        for path in paths:
+            src = os.path.join(path, dest)
+            if os.path.exists(src):
+                shutil.copyfile(src, os.path.join('report', dest)) # Put sphinx
+                                                                   # files in 
+                                                                   # separate
+                                                                   # dir
+            E.info("created new configuration file `%s` " % dest)
+            break
+
+        else:
+            E.warn('''default config file for `%s` not found in
+                      %s
+                      Continuing without these.''' % (dest, paths))
 
 def printConfigFiles():
     '''
@@ -1036,6 +1097,8 @@ def main(args=sys.argv):
         printConfigFiles()
 
     elif options.pipeline_action == "config":
+    # (Antonio) I've modified this section, see explanation and changes in the
+    # writeConfigFiles function above.
         f = sys._getframe(1)
         caller = inspect.getargvalues(f).locals["__file__"]
             # CGATPipelines have a pipe_XX/pipe_XX hierarchy, but a simplified
