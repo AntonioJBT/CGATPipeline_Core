@@ -105,7 +105,7 @@ cgat_packages.append("CGATScripts")
 
 cgat_package_dirs = {'CGAT': 'CGAT',
                      'CGATScripts': 'scripts',
-                     'CGATPipeline_core': 'CGATPipelines'}
+                     'CGATPipeline_core': 'CGATPipelines'}#'CGATPipelineCore'}
 
 ##########################################################
 ##########################################################
@@ -141,7 +141,7 @@ setup(
     package_dir=cgat_package_dirs,
     include_package_data=True,
     #entry_points={
-    #    'console_scripts': ['pipeline_quickstart = CGATScripts.pipeline_quickstart:main']
+    #    'console_scripts': ['pipeline_XXXX = CGATScripts.pipeline_XXXX:main']
     #},
     # dependencies
     install_requires=install_requires,
