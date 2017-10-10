@@ -152,7 +152,10 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                            'make.bat',
                            'include_links.rst',
                            'index.rst',
-                           ] # These are for a sphinx setup, not needed
+                           ]
+                           #'*.rst',
+                           #'*.bib',
+                             # These are for a sphinx setup, not needed
                              # with CGATReport
                              # A 'report_pipeline_*.rst' template is
                              # searched for below
@@ -186,27 +189,51 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                   '''.format(pipeline_path, pipeline_path_2, general_path)
                   )
 
-    # Copy the files across if they are found:
+
     for dest in sphinx_config_files:
         if os.path.exists(dest):
             E.warn("file `%s` already exists - skipped" % dest)
             continue
 
-        for path in paths:
+        else:
             src = os.path.join(path, dest)
             if os.path.exists(src):
                 # Put sphinx files in separate dir:
                 shutil.copyfile(src, os.path.join(report_dir, dest))
                 E.info("created new configuration file `%s` " % dest)
                 break
+'''
+    # Copy the files across if they are found:
+    f_count = 0
+    for path in paths:
+        if os.path.exists(path):
+            for f in os.listdir(os.path.abspath(path)):
+                for dest in sphinx_config_files:
+                    if fnmatch.fnmatch(f, dest):
+                        dest = f
+                    if os.path.exists(dest):
+                        E.warn("file `%s` already exists - skipped" % dest)
+                        continue
 
-        else:
-            E.warn('''No sphinx-quickstart skeleton files such as:
-                      {}
-                      were found
-                      in
-                      {}
-                      Continuing without.'''.format(dest, paths))
+                    else:
+                        f_count += 1
+                        src = os.path.join(path, dest)
+                        if os.path.exists(src):
+                            # Put sphinx files in separate dir:
+                            shutil.copyfile(src, os.path.join(report_dir, dest))
+                            E.info("created new configuration file `%s` " % dest)
+                            break
+    if f_count > 0:
+        pass
+'''
+    else:
+        E.warn('''No sphinx-quickstart skeleton files such as:
+                  {}
+                  were found
+                  in
+                  {}
+                  Continuing without.'''.format(dest, paths))
+
 
 def printConfigFiles():
     '''
