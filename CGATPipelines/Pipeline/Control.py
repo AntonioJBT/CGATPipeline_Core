@@ -152,9 +152,10 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                            'make.bat',
                            'include_links.rst',
                            'index.rst',
-                           '*.rst',
-                           '*.bib',
-                           ] # These are for a sphinx setup, not needed
+                           ]
+                           #'*.rst',
+                           #'*.bib',
+                             # These are for a sphinx setup, not needed
                              # with CGATReport
                              # A 'report_pipeline_*.rst' template is
                              # searched for below
@@ -188,6 +189,20 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                   '''.format(pipeline_path, pipeline_path_2, general_path)
                   )
 
+
+    for dest in sphinx_config_files:
+        if os.path.exists(dest):
+            E.warn("file `%s` already exists - skipped" % dest)
+            continue
+
+        else:
+            src = os.path.join(path, dest)
+            if os.path.exists(src):
+                # Put sphinx files in separate dir:
+                shutil.copyfile(src, os.path.join(report_dir, dest))
+                E.info("created new configuration file `%s` " % dest)
+                break
+'''
     # Copy the files across if they are found:
     f_count = 0
     for path in paths:
@@ -210,6 +225,7 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                             break
     if f_count > 0:
         pass
+'''
     else:
         E.warn('''No sphinx-quickstart skeleton files such as:
                   {}
@@ -217,6 +233,7 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                   in
                   {}
                   Continuing without.'''.format(dest, paths))
+
 
 def printConfigFiles():
     '''
