@@ -152,8 +152,6 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                            'make.bat',
                            'include_links.rst',
                            'index.rst',
-                           '*.rst',
-                           '*.bib',
                            ] # These are for a sphinx setup, not needed
                              # with CGATReport
                              # A 'report_pipeline_*.rst' template is
@@ -189,22 +187,18 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
                   )
 
     # Copy the files across if they are found:
-    for path in paths:
-        if os.path.exists(path):
-            for f in os.listdir(os.path.abspath(path)):
-                for dest in sphinx_config_files:
-                    dest = fnmatch.fnmatch(f, dest)
-                    if os.path.exists(dest):
-                        E.warn("file `%s` already exists - skipped" % dest)
-                        continue
+    for dest in sphinx_config_files:
+        if os.path.exists(dest):
+            E.warn("file `%s` already exists - skipped" % dest)
+            continue
 
-                    else:
-                        src = os.path.join(path, dest)
-                        if os.path.exists(src):
-                        # Put sphinx files in separate dir:
-                        shutil.copyfile(src, os.path.join(report_dir, dest))
-                        E.info("created new configuration file `%s` " % dest)
-                        break
+        for path in paths:
+            src = os.path.join(path, dest)
+            if os.path.exists(src):
+                # Put sphinx files in separate dir:
+                shutil.copyfile(src, os.path.join(report_dir, dest))
+                E.info("created new configuration file `%s` " % dest)
+                break
 
         else:
             E.warn('''No sphinx-quickstart skeleton files such as:
