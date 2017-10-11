@@ -80,9 +80,13 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     # Antonio
     paths = [pipeline_path, pipeline_path_2, general_path]
     report_dir = 'pipeline_report'
-    os.mkdir(report_dir) # Sphinx config files will be copied here
-                         # CGATReport only needs its conf.py to generate the rest
-                         # though
+    try:
+        os.mkdir(report_dir) # Sphinx config files will be copied here
+                             # CGATReport only needs its conf.py to generate the rest
+                             # though
+    except FileExistsError:
+        E.warn("directory `%s` already exists" % report_dir)
+        raise
 
     # Look for ini file:
     f_count = 0
@@ -150,8 +154,6 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
     E.info('Looking for additional Sphinx configuration files.')
     sphinx_config_files = ['Makefile',
                            'make.bat',
-                           'include_links.rst',
-                           'index.rst',
                            '*.rst',
                            '*.bib',
                            ] # These are for a sphinx setup, not needed
@@ -190,24 +192,33 @@ def writeConfigFiles(pipeline_path, pipeline_path_2, general_path):
 
     # Copy the files across if they are found:
     f_count = 0
+    # Check all the paths and their files given above when searching for config files:
     for path in paths:
         if os.path.exists(path):
-            for f in os.listdir(os.path.abspath(path)):
+            for f in os.listdir(path):
+                # For each file or search term given, match to an existing file:
                 for dest in sphinx_config_files:
                     if fnmatch.fnmatch(f, dest):
-                        dest = f
-                    if os.path.exists(dest):
-                        E.warn("file `%s` already exists - skipped" % dest)
-                        continue
+                        f_to_copy = f
+                        # If a match is found, walk the cwd to check it's not
+                        # already present:
+                        for root, dirs, files in os.walk('.'):
+                            if f_to_copy in files:
+                                E.warn("file `%s` already exists - skipped" % f_to_copy)
+                                continue
 
-                    else:
-                        f_count += 1
-                        src = os.path.join(path, dest)
-                        if os.path.exists(src):
-                            # Put sphinx files in separate dir:
-                            shutil.copyfile(src, os.path.join(report_dir, dest))
-                            E.info("created new configuration file `%s` " % dest)
-                            break
+                        # If not present, copy the file:
+                        else:
+                            f_count += 1
+                            src = os.path.join(path, f_to_copy)
+                            if os.path.exists(src):
+                                # Put sphinx files in separate dir:
+                                shutil.copyfile(src, os.path.join(report_dir,
+                                                                  f_to_copy)
+                                                )
+                                E.info("created new configuration file `%s` "
+                                        % f_to_copy)
+                                break
     if f_count > 0:
         pass
     else:
