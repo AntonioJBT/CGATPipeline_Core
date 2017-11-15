@@ -1155,8 +1155,16 @@ def main(args=sys.argv):
     elif options.pipeline_action == "config":
     # (Antonio) I've modified this section, see explanation and changes in the
     # writeConfigFiles function above.
-        f = sys._getframe(1)
-        caller = inspect.getargvalues(f).locals["__file__"]
+        try:
+            f = sys._getframe(1)
+            caller = inspect.getargvalues(f).locals["__file__"]
+        except KeyError as e:
+            print(e)
+            f = sys._getframe(0)
+            caller = inspect.getargvalues(f).locals["__file__"]
+        else:
+            print('Unable to find path to file being executed. Exiting.')
+
             # CGATPipelines have a pipe_XX/pipe_XX hierarchy, but a simplified
             # version would only have pipe_XX/
             # so creating an additional pipeline_path
