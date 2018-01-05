@@ -273,7 +273,8 @@ def run_report(clean=True,
 
     # warning: memory gets multiplied by threads, so set it not too
     # high
-    job_memory = "1G" # This causes problems in outside HPCs, Why hardwire?
+    job_memory = PARAMS["report_memory"]
+    #"1G" # This causes problems in outside HPCs, Why hardwire?
                       # Maybe better to set in PARAMS["report_memory"]
     job_threads = PARAMS["report_threads"]
 

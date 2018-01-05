@@ -44,7 +44,9 @@ except ImportError:
 try:
     import drmaa
     HAS_DRMAA = True
-except RuntimeError:
+except:
+# the following does not work on Travis
+#except ImportError or RuntimeError:
     HAS_DRMAA = False
 
 from ruffus import pipeline_printout_graph, pipeline_printout, \
@@ -255,17 +257,17 @@ def printConfigFiles():
     '''
 
     filenames = PARAMS['pipeline_ini']
-    print ("\n List of .ini files used to configure the pipeline")
+    print("\n List of .ini files used to configure the pipeline")
     s = len(filenames)
     if s == 0:
-        print (" No ini files passed!")
+        print(" No ini files passed!")
     elif s >= 1:
-        print (" %-11s: %s " % ("Priority", "File"))
+        print(" %-11s: %s " % ("Priority", "File"))
         for f in filenames:
             if s == 1:
-                print (" (highest) %s: %s\n" % (s, f))
+                print(" (highest) %s: %s\n" % (s, f))
             else:
-                print (" %-11s: %s " % (s, f))
+                print(" %-11s: %s " % (s, f))
             s -= 1
 
 
@@ -991,7 +993,7 @@ def main(args=sys.argv):
 
     # see inputValidation function in Parameters.py
     if options.input_validation:
-       inputValidation(PARAMS, sys.argv[0])
+        inputValidation(PARAMS, sys.argv[0])
 
     if options.pipeline_action == "check":
         counter, requirements = Requirements.checkRequirementsFromAllModules()
@@ -1044,7 +1046,7 @@ def main(args=sys.argv):
 
                 logger.addFilter(messenger)
 
-                if not options.without_cluster:
+                if not options.without_cluster and HAS_DRMAA:
                     global task
                     # use threading instead of multiprocessing in order to
                     # limit the number of concurrent jobs by using the
